@@ -77,7 +77,6 @@ export default function Home() {
     }, [])
   );
 
-  // Fetch user data
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -95,30 +94,26 @@ export default function Home() {
     }
   }, [isFocused]);
 
-  //get all maps of user
-
   const fetchUserMaps = async () => {
     try {
       const response = await AxiosInstance.get(
         '/api/auth/mapTemplate/getAllTemplates'
       );
       setUserMaps(response.data);
-      showAllMaps(); // Call showAllMaps after setting userMaps
+      showAllMaps();
     } catch (error) {
       console.error('Failed to fetch user maps:', error);
     }
   };
 
-  //get the current location
   useEffect(() => {
     (async () => {
-      // Request permission to access location
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         console.error('Permission to access location was denied');
         return;
       }
-      let location = await Location.getCurrentPositionAsync({}); // Get current location
+      let location = await Location.getCurrentPositionAsync({});
       setCurrentLocation(location);
     })();
   }, []);
@@ -130,7 +125,6 @@ export default function Home() {
     setProfileModalVisible(true);
   };
 
-  //options for the selection modal
   const options = [
     {
       icon: 'map-marker-radius',
@@ -144,7 +138,6 @@ export default function Home() {
     },
   ];
 
-  // Map types
   const mapTypes = [
     { name: 'Satellite', value: 'satellite' },
     { name: 'Standard', value: 'standard' },
@@ -152,7 +145,6 @@ export default function Home() {
     { name: 'Terrain', value: 'terrain' },
   ];
 
-  //toggle the map type
   const toggleMapType = () => {
     setShowDropdown(!showDropdown);
   };
@@ -163,9 +155,8 @@ export default function Home() {
   };
 
   const focusOnCurrentLocation = () => {
-    setShowCurrentLocation(!showCurrentLocation); // Toggle current location
-    setSearchedLocation(null); // Clear searched location
-    // Animate to current location
+    setShowCurrentLocation(!showCurrentLocation);
+    setSearchedLocation(null);
     if (!showCurrentLocation && currentLocation && mapRef.current) {
       mapRef.current.animateToRegion({
         latitude: currentLocation.coords.latitude,
@@ -176,12 +167,10 @@ export default function Home() {
     }
   };
 
-  // handle the template press
   const handleTemplatePress = () => {
     navigation.navigate('SavedTemplatesScreen');
   };
 
-  // Dismiss the keyboard when tapping outside the text input
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
@@ -197,9 +186,7 @@ export default function Home() {
           `/api/auth/mapTemplate/getAllmapData/${mapId}`
         );
         setSelectedMapDetails(response.data);
-        setIsMapDetailsVisible(true); // Set this to true when map is selected
-
-        // Zoom to the selected map
+        setIsMapDetailsVisible(true);
         const selectedMap = userMaps.find((map) => map._id === mapId);
         if (selectedMap && mapRef.current) {
           const coordinates = selectedMap.locationPoints.map((point) => ({
@@ -222,7 +209,6 @@ export default function Home() {
 
   const zoomOutMap = () => {
     if (mapRef.current) {
-      // Zoom out to show all maps
       const allCoordinates = userMaps.flatMap((map) =>
         map.locationPoints.map((point) => ({
           latitude: point.latitude,
@@ -237,7 +223,7 @@ export default function Home() {
     }
     setSelectedMapId(null);
     setSelectedMapDetails(null);
-    setIsMapDetailsVisible(false); // Set this to false when zooming out
+    setIsMapDetailsVisible(false);
   };
 
   const getCenterOfPolygon = (points) => {

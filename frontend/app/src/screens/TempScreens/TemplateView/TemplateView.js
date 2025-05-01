@@ -101,7 +101,6 @@ const TemplateView = ({ route, navigation }) => {
     });
   };
 
-  // check id exist in the databse
   const checkIdFence = async (id) => {
     try {
       const response = await AxiosInstance.get(`/api/fence/check-id/${id}`);
@@ -112,7 +111,6 @@ const TemplateView = ({ route, navigation }) => {
         console.log('ID does not exist');
       }
     } catch (error) {
-      // Handle error, maybe show a message to the user
       if (error.response.status === 404) {
         console.log('ID not found');
         navigation.navigate('Fence', {
@@ -123,7 +121,6 @@ const TemplateView = ({ route, navigation }) => {
         });
       } else {
         console.error('Error checking ID:', error);
-        // Handle other errors
       }
     }
   };
@@ -138,7 +135,6 @@ const TemplateView = ({ route, navigation }) => {
         console.log('ID does not exist');
       }
     } catch (error) {
-      // Handle error, maybe show a message to the user
       if (error.response.status === 404) {
         console.log('ID not found');
         navigation.navigate('Clearland', {
@@ -149,7 +145,6 @@ const TemplateView = ({ route, navigation }) => {
         });
       } else {
         console.error('Error checking ID:', error);
-        // Handle other errors
       }
     }
   };
@@ -166,7 +161,6 @@ const TemplateView = ({ route, navigation }) => {
         console.log('ID does not exist');
       }
     } catch (error) {
-      // Handle error, maybe show a message to the user
       if (error.response.status === 404) {
         console.log('ID not found');
         navigation.navigate('Plantation', {
@@ -177,7 +171,6 @@ const TemplateView = ({ route, navigation }) => {
         });
       } else {
         console.error('Error checking ID:', error);
-        // Handle other errors
       }
     }
   };
