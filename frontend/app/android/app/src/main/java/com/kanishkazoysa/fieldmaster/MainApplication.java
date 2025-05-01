@@ -1,4 +1,3 @@
-package com.kanishkazoysa.fieldmaster;
 
 import android.app.Application;
 import android.content.res.Configuration;

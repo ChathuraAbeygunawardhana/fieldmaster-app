@@ -81,9 +81,7 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace 'com.kanishkazoysa.fieldmaster'
     defaultConfig {
-        applicationId 'com.kanishkazoysa.fieldmaster'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
