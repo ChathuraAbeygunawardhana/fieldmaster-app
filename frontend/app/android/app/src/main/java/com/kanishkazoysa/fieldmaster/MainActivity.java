@@ -1,4 +1,3 @@
-package com.kanishkazoysa.fieldmaster;
 
 import android.os.Build;
 import android.os.Bundle;
